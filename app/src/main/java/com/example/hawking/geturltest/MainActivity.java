@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -33,9 +34,13 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnGet, btnPost, btnMap;
+    Button btnGet, btnMap;
     TextView txtResult;
-    String urlStr = "http://echo.jsontest.com/insert-key-here/insert-value-here/key/values";
+    EditText txtEmail, txtPass;
+//    String urlStr = "http://echo.jsontest.com/insert-key-here/insert-value-here/key/values";
+    String urlGET = "http://www.davdk.tk/controllers/getCoordinateJson.php?id_device=1&start_date=1480032000&end_date=1480118340";
+    String urlPost = "http://davdk.tk/index.php?ctr=auth&act=login_mobile_post";
+    int auth = 0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -59,38 +64,27 @@ public class MainActivity extends AppCompatActivity {
         });
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
         btnMap = (Button) findViewById(R.id.btnMap);
         btnGet = (Button) findViewById(R.id.btnGet);
-        btnPost = (Button) findViewById(R.id.btnPost);
         txtResult = (TextView) findViewById(R.id.txtResult);
-        btnGet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    txtResult.setText(readJsonFromUrl(urlStr));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-        btnPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    txtResult.setText(GetText());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
 
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnGet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    txtResult.setText(readJsonFromUrl(urlGET).toString());
+                } catch (IOException e){
+
+                }
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -125,56 +119,6 @@ public class MainActivity extends AppCompatActivity {
         } finally {
             conn.disconnect();
         }
-    }
-
-    public String GetText() throws UnsupportedEncodingException {
-        // Create data variable for sent values to server
-        String data = URLEncoder.encode("name", "UTF-8")
-                + "=" + URLEncoder.encode("Thanh Huu", "UTF-8");
-        data += "&" + URLEncoder.encode("email", "UTF-8") + "="
-                + URLEncoder.encode("huuth@gmail,com", "UTF-8");
-
-        data += "&" + URLEncoder.encode("user", "UTF-8")
-                + "=" + URLEncoder.encode("huuth", "UTF-8");
-
-        data += "&" + URLEncoder.encode("pass", "UTF-8")
-                + "=" + URLEncoder.encode("passssssssss", "UTF-8");
-        String text = "";
-        BufferedReader reader = null;
-
-        // Send data
-        try {
-            // Defined URL  where to send data
-            URL url = new URL("http://androidexample.com/media/webservice/httppost.php");
-            // Send POST data request
-            URLConnection conn = url.openConnection();
-            conn.setDoOutput(true);
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(data);
-            wr.flush();
-            // Get the server response
-            reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            // Read Server Response
-            while ((line = reader.readLine()) != null) {
-                // Append server response in string
-                sb.append(line + "\n");
-            }
-            text = sb.toString();
-        } catch (Exception ex) {
-        } finally {
-            try {
-
-                reader.close();
-            } catch (Exception ex) {
-            }
-        }
-
-        // Show response on activity
-        return text;
-
     }
 
 

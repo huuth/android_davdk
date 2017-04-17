@@ -13,6 +13,7 @@
     tools:context="com.example.hawking.geturltest.MainActivity"
     tools:showIn="@layout/activity_main"
     android:orientation="vertical">
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,11 +24,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnGet"
         android:text="Get"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnPost"
-        android:text="Post"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
