@@ -1,5 +1,6 @@
 package com.example.hawking.geturltest;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -32,7 +33,7 @@ import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnGet, btnPost;
+    Button btnGet, btnPost, btnMap;
     TextView txtResult;
     String urlStr = "http://echo.jsontest.com/insert-key-here/insert-value-here/key/values";
     /**
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         });
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        btnMap = (Button) findViewById(R.id.btnMap);
         btnGet = (Button) findViewById(R.id.btnGet);
         btnPost = (Button) findViewById(R.id.btnPost);
         txtResult = (TextView) findViewById(R.id.txtResult);
@@ -83,10 +85,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
 
     public String readJsonFromUrl(String urlStr) throws IOException {
         URL url = new URL(urlStr);
