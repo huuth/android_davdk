@@ -337,6 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 //
 //            // TODO: register the new account here.
+//            return true;
             try {
                 String rs = GetText();
                 JSONObject reader = new JSONObject(rs);
@@ -359,7 +360,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                Intent i = new Intent(getApplicationContext(), SecondActivity.class);
                 startActivity(i);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -10,6 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.hawking.geturltest.LoginActivity">
 
+    <LinearLayout
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:src="@drawable/logo"/>
+
+    </LinearLayout>
+
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -72,4 +83,10 @@
 
         </LinearLayout>
     </ScrollView>
+    <TextView
+        android:text="Copy right by TEAM KIKA"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>

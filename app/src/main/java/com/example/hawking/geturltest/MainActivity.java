@@ -2,6 +2,7 @@ package com.example.hawking.geturltest;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
@@ -20,6 +21,9 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,6 +35,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,16 +87,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     txtResult.setText(readJsonFromUrl(urlGET).toString());
-                } catch (IOException e){
-
-                }
+                } catch (IOException io){}
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
 
     public String readJsonFromUrl(String urlStr) throws IOException {
         URL url = new URL(urlStr);
@@ -109,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             BufferedReader br = new BufferedReader(is);
             String read = br.readLine();
-
+            System.out.println("json line: " + read);
             while (read != null) {
-                //System.out.println(read);
+                System.out.println(read);
                 sb.append(read);
                 read = br.readLine();
             }
@@ -180,3 +182,4 @@ public class MainActivity extends AppCompatActivity {
         client.disconnect();
     }
 }
+
