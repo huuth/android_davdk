@@ -2,16 +2,15 @@ package com.example.hawking.geturltest;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,12 +28,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -86,8 +81,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    txtResult.setText(readJsonFromUrl(urlGET).toString());
-                } catch (IOException io){}
+//                    String jsonStr = readJsonFromUrl(urlGET).toString();
+//                    System.out.println(jsonStr);
+//
+//                    JSONObject js = new JSONObject(jsonStr);
+//                    System.out.println(js.toString());
+//                    System.out.println(js.getString("lat"));
+                    String rs = "xxx";
+                    ArrayList<JSONObject> list = readListJsonFromUrl(urlGET);
+                    for (JSONObject json: list){
+                        System.out.println("json-- "+json.getString("address")+"||"+json.getString("lat"));
+//                        rs += json.getString("lat") + "||";
+                    }
+                    txtResult.setText(rs);
+                } catch (IOException io){
+                    io.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -111,18 +122,50 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder sb = new StringBuilder();
             BufferedReader br = new BufferedReader(is);
             String read = br.readLine();
-            System.out.println("json line: " + read);
-            while (read != null) {
-                System.out.println(read);
-                sb.append(read);
-                read = br.readLine();
-            }
+            sb.append(read);
+//            System.out.println("json line: " + read);
+//            while (read != null) {
+//                System.out.println(read);
+//                sb.append(read);
+//                read = br.readLine();
+//            }
             return sb.toString();
         } finally {
             conn.disconnect();
         }
     }
 
+    public ArrayList<JSONObject> readListJsonFromUrl(String urlStr) throws IOException {
+        ArrayList<JSONObject> jsonObjects = new ArrayList<JSONObject>();
+        URL url = new URL(urlStr);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setReadTimeout(10000); // millis
+        conn.setConnectTimeout(15000); // millis
+        conn.setDoOutput(true);
+        conn.connect();
+        int response = conn.getResponseCode();
+        System.out.print(response);
+        try {
+            InputStream in = new BufferedInputStream(conn.getInputStream());
+            InputStreamReader is = new InputStreamReader(in);
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = new BufferedReader(is);
+            String read = br.readLine();
+
+            while (read != null) {
+                sb.append(read);
+                JSONObject reader = new JSONObject(read.toString().trim());
+                jsonObjects.add(reader);
+                read = br.readLine();
+            }
+            return jsonObjects;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            conn.disconnect();
+        }
+        return null;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
