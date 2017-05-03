@@ -1,6 +1,7 @@
 package com.example.hawking.geturltest;
 
 import android.graphics.Color;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -113,6 +114,7 @@ public class hanhtrinhFragment extends Fragment implements OnMapReadyCallback {
         ReadTask downloadTask1 = new ReadTask();
         // Start downloading json data from Google Directions API
         downloadTask1.execute(url1);
+
         try {
             ArrayList<JSONObject> list = readListJsonFromUrl(urlGET);
             for (int i=1; i<list.size()-1; i++){
@@ -140,7 +142,39 @@ public class hanhtrinhFragment extends Fragment implements OnMapReadyCallback {
         mMap.animateCamera(zoom);
     }
 
+
     public ArrayList<JSONObject> readListJsonFromUrl(String urlStr) throws IOException {
+
+
+
+    private String  getMapsApiDirectionsUrl(LatLng origin,LatLng dest) {
+        // Origin of route
+        String str_origin = "origin="+origin.latitude+","+origin.longitude;
+
+        // Destination of route
+        String str_dest = "destination="+dest.latitude+","+dest.longitude;
+
+
+        // Sensor enabled
+        String sensor = "sensor=false";
+
+        // Building the parameters to the web service
+        String parameters = str_origin+"&"+str_dest+"&"+sensor;
+
+        // Output format
+        String output = "json";
+
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
+
+
+        return url;
+
+    };
+
+
+
+    public ArrayList<JSONObject> readJsonFromUrl(String urlStr) throws IOException {
         ArrayList<JSONObject> jsonObjects = new ArrayList<JSONObject>();
         URL url = new URL(urlStr);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -170,7 +204,8 @@ public class hanhtrinhFragment extends Fragment implements OnMapReadyCallback {
             conn.disconnect();
         }
         return null;
-    }
+    };
+
 
     private String  getMapsApiDirectionsUrl(LatLng origin,LatLng dest) {
         // Origin of route
@@ -375,7 +410,8 @@ public class hanhtrinhFragment extends Fragment implements OnMapReadyCallback {
 
             mMap.addPolyline(polyLineOptions);
 
-        }}
+        }
+    }
 
 
 
