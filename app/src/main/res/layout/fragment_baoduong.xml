@@ -134,7 +134,7 @@
                 android:textSize="18dp"/>
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/progressBarXich"
                 style="@android:style/Widget.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
@@ -144,7 +144,7 @@
                 android:progress="0" />
         </LinearLayout>
         <TextView
-            android:id="@+id/txtPercentage"
+            android:id="@+id/txtPercentageXich"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -163,7 +163,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tong"
+        android:id="@+id/txtTong"
         android:text="14467km"/>
 
 
