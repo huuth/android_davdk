@@ -27,7 +27,7 @@ import java.net.URL;
  * Created by thuytien on 4/17/17.
  */
 
-public class baoduongFragment extends Fragment {
+public class BaoduongFragment extends Fragment {
 
     String urlBaoDuong = "http://davdk.tk/index.php?ctr=statusmotor&act=get_status_mobile&id_device=1";
     ProgressBar progressDau, progressBarLoc, progressBarBugi, progressBarXich;

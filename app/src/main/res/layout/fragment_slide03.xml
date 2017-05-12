@@ -43,5 +43,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/btn"
-        android:text="Su dung dich vu"/>
+        android:text="Sử dụng dịch vụ"/>
 </RelativeLayout>

@@ -35,7 +35,7 @@ import java.util.ArrayList;
  * Created by thuytien on 4/17/17.
  */
 
-public class hanhtrinhFragment extends Fragment implements OnMapReadyCallback {
+public class HanhtrinhFragment extends Fragment implements OnMapReadyCallback {
     private View rootView;
     GoogleMap mMap;
     MapView mMapView;

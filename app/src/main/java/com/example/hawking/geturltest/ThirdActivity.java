@@ -37,15 +37,15 @@ public class ThirdActivity extends AppCompatActivity {
         }
 
         List<Fragment> listFrag = new ArrayList<>();
-        listFrag.add(new hanhtrinhFragment());
-        listFrag.add(new baoduongFragment());
-        listFrag.add(new accountFragment());
+        listFrag.add(new HanhtrinhFragment());
+        listFrag.add(new BaoduongFragment());
+//        listFrag.add(new AccountFragment());
 
         mPagerAdapter = new PageAdapter(this.getSupportFragmentManager(), listFrag);
         mViewPager.setAdapter(mPagerAdapter);
         mTabs.setupWithViewPager(mViewPager);
-        String[] strTab = { "Hanh trinh", "Thong Tin Bao duong", "Account"};
-        for (int i = 0; i < 3; i++) {
+        String[] strTab = { "Hành trình", "Thông tin bảo dưỡng"};
+        for (int i = 0; i < 2; i++) {
             mTabs.getTabAt(i).setText(strTab[i]);
         }
 

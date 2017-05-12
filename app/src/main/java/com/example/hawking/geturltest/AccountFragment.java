@@ -10,7 +10,7 @@ import android.view.ViewGroup;
  * Created by thuytien on 4/17/17.
  */
 
-public class accountFragment extends android.support.v4.app.Fragment {
+public class AccountFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
